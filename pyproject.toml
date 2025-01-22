@@ -1,0 +1,18 @@
+[project]
+name = "Algorithms-and-Datastructures"
+version = "1.0.0"
+description = "A module contianing different algorithms and datastructures learned through uni and books."
+authors = [
+    { name = "Gérard Lichtert", email = "62557229+thebaconfate@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = ">=3.13"
+packages = [{ include = "src" }]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+pytest = "^8.3.4"
