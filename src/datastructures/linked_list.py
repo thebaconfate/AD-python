@@ -43,7 +43,7 @@ class LinkedList:
                 node = node.next
             return list_length
 
-    def insert_first(self, value) -> Self:
+    def attach_first(self, value) -> Self:
         """Inserts a value at the beginning of the linked list"""
         if self.__head is None:
             self.__head = LinkedListNode(value)
@@ -51,11 +51,27 @@ class LinkedList:
             self.__head = LinkedListNode(value, self.__head)
         return self
 
-    def insert_middle(self, value, idx) -> Self:
+    def attach_middle(self, value, idx) -> Self:
         """Inserts a value somewhere between the beginning or end of the linked list"""
+        indexError = IndexError("Index exceeds size of linked list")
+        if self.__head is None:
+            if idx > 0:
+                raise indexError
+            else:
+                self.__head = LinkedListNode(value)
+        else:
+            i = 0
+            node = self.__head
+            while node.next is not None and i < idx:
+                node.next
+            if i != idx:
+                raise indexError
+            else:
+                new_node = LinkedListNode(value, node.next)
+                node.next = new_node
         return self
 
-    def insert_last(self, value) -> Self:
+    def attach_last(self, value) -> Self:
         """Inserts a value at the end of the linked list"""
         new_node = LinkedListNode(value)
         if self.__head is None:
@@ -79,6 +95,15 @@ class LinkedList:
 
     def delete_middle(self, value, idx) -> Self:
         """Deletes a value in between the first and end of the linked list"""
+        indexError = IndexError("Index exceeds size of linked list")
+        if self.__head is None:
+            raise indexError
+        else:
+            node = self.__head
+            i = 0
+            while node.next is not None and i < idx - 1:
+                node = node.next
+            node.next = node.next.next
         return self
 
     def delete_last(self) -> Self:
