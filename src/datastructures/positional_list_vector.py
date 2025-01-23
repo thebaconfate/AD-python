@@ -1,7 +1,7 @@
 from typing import Callable, Any
 from functools import reduce
 
-from src.datastructures.vector import Vector, vector, vector_length
+from src.datastructures.vector import Array, array, array_length
 
 
 # TODO: Check out the API
@@ -10,7 +10,7 @@ class PositionalList:
 
     def __init__(self, size: int, equality: Callable[[Any, Any], bool]) -> None:
         """Expects the size of the positional list as a non-negative integer and an equality function"""
-        self.__storage: Vector = vector(size)
+        self.__storage: Array = array(size)
         self.__size: int = size
         self.__equality: Callable[[Any, Any], bool] = equality
 
@@ -30,14 +30,14 @@ class PositionalList:
         return self.__equality
 
     @property
-    def storage(self) -> Vector:
+    def storage(self) -> Array:
         """returns the storage of the positional list"""
         return self.__storage
 
     @storage.setter
     def storage(self, new_storage: Any) -> None:
         """Sets a new storage for the positional list"""
-        if isinstance(new_storage, Vector):
+        if isinstance(new_storage, Array):
             self.__storage = new_storage
         else:
             raise ValueError("new storage must be of type Vector")
@@ -61,7 +61,7 @@ def length(plist: PositionalList) -> int:
 
 def is_full(plist: PositionalList) -> bool:
     """Returns wether the positional list is full"""
-    return (plist.size + 1) == vector_length(plist.storage)
+    return (plist.size + 1) == array_length(plist.storage)
 
 
 def is_empty(plist: PositionalList) -> bool:
