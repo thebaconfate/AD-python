@@ -45,6 +45,10 @@ class LinkedList:
 
     def insert_first(self, value) -> Self:
         """Inserts a value at the beginning of the linked list"""
+        if self.__head is None:
+            self.__head = LinkedListNode(value)
+        else:
+            self.__head = LinkedListNode(value, self.__head)
         return self
 
     def insert_middle(self, value, idx) -> Self:
@@ -53,10 +57,24 @@ class LinkedList:
 
     def insert_last(self, value) -> Self:
         """Inserts a value at the end of the linked list"""
+        new_node = LinkedListNode(value)
+        if self.__head is None:
+            self.__head = new_node
+        else:
+            node = self.__head
+            while node.next is not None:
+                node = self.__head.next
+            node.next = new_node
         return self
 
     def delete_first(self) -> Self:
         """Deletes the first value of the linked list"""
+        if self.__head is None:
+            raise ValueError(
+                "Cannot remove first element of a linked list if there is none"
+            )
+        else:
+            self.__head = self.__head.next
         return self
 
     def delete_middle(self, value, idx) -> Self:
@@ -65,9 +83,27 @@ class LinkedList:
 
     def delete_last(self) -> Self:
         """Deletes the last value in the linked list"""
+        if self.__head is None:
+            raise ValueError(
+                "Cannot remove last element of a linked list if there is none"
+            )
+        else:
+            node = self.__head
+            while node.next is not None and node.next.next is not None:
+                node = node.next
+            node.next = None
         return self
 
     def find(self, value) -> int | Literal[False]:
+        """Tries to find the position of a value in the linked list. Returns the index if found, False otherwise"""
         found = False
-        """Returns the index of the found element or false if it is not found in the linked list"""
-        return found
+        if self.__head is not None:
+            node = self.__head
+            idx = 0
+            while not found and node.next is not None:
+                if node.value is value:
+                    found = True
+                    break
+                node = node.next
+                idx += 1
+        return idx if found else found
