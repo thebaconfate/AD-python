@@ -1,8 +1,10 @@
 from typing import Callable, Any
+from functools import reduce
 
 from src.datastructures.vector import Vector, vector, vector_length
 
 
+# TODO: Check out the API
 class PositionalList:
     """Creates a positional list"""
 
@@ -45,8 +47,11 @@ def new(size: int, equality: Callable[[Any, Any], bool]):
     return PositionalList(size, equality=equality)
 
 
-def from_list():
-    pass
+def from_list(lst: list[Any], equality: Callable[[Any, Any], bool]):
+    result = new(len(lst), equality)
+    for item in lst:
+        add_after(result, item)
+    return result
 
 
 def length(plist: PositionalList) -> int:
@@ -130,5 +135,9 @@ def add_before():
     pass
 
 
-def add_after():
-    pass
+def add_after(positional_list: PositionalList, value: Any, position: int | None = None):
+    if position is not None and is_empty(positional_list):
+        raise Exception(f"Illegal position add_after {position}")
+    elif position is not None:
+        pass
+        # positional_list.attach_last(positional_list, value)
