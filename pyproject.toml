@@ -1,7 +1,10 @@
 [project]
-name = "algorithms-and-datastructures"
+name = "datastructures-and-algorithms"
 version = "0.1.0"
-description = ""
+description = """
+A module containing different datastructures and algorithms learned at the
+university or read in books.
+"""
 authors = [
     {name = "Gérard Lichtert",email = "62557229+thebaconfate@users.noreply.github.com"}
 ]
